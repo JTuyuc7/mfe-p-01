@@ -8,7 +8,7 @@ export default () => {
   const history = useHistory();
 
   useEffect(() => {
-    const { onParentNavigate } = mount(ref.current, {
+    const props = mount(ref.current, {
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location;
         if (pathname !== nextPathname) {
@@ -18,9 +18,10 @@ export default () => {
       }
     });
 
-    if (onParentNavigate) {
-      history.listen(onParentNavigate);
+    if (props?.onParentNavigate) {
+      history.listen(props?.onParentNavigate);
     }
+    console.log("🚀 ~ useEffect ~ props: in prod?", props)
   }, []);
 
   return <div ref={ref} />;
