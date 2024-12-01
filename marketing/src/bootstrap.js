@@ -4,7 +4,6 @@ import App from './App';
 import { createMemoryHistory, createBrowserHistory } from 'history'
 
 const mount = (el, { onNavigate, defaultHistoy, initialPath }) => {
-  // console.log("🚀 ~ mount ~ defaultHistoy:", defaultHistoy)
   const history = defaultHistoy ?? createMemoryHistory();
 
   if (onNavigate) {
@@ -26,8 +25,6 @@ const mount = (el, { onNavigate, defaultHistoy, initialPath }) => {
   return {
     onParentNavigate({ pathname: nextPathname }) {
       const { pathname } = history.location;
-      // console.log("🚀 ~ onParentNavigate ~ pathname: desde marketing-*--*-*", pathname)
-
       console.log('pathname and nextPathname outside the if', pathname, nextPathname);
       if (pathname !== nextPathname) {
         console.log('pathname and nextPathname', pathname, nextPathname);
