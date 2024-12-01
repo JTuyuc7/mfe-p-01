@@ -1,44 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { createMemoryHistory, createBrowserHistory } from 'history'
+import { createMemoryHistory, createBrowserHistory } from 'history';
 
-const mount = (el, { onNavigate, defaultHistoy, initialPath }) => {
-  const history = defaultHistoy ?? createMemoryHistory();
+const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+  const history = defaultHistory ?? createMemoryHistory();
+
+  if (initialPath) {
+    history.push(initialPath);
+  }
 
   if (onNavigate) {
     history.listen(onNavigate);
   }
 
-  if (initialPath) {
-    const { pathname } = history.location;
-    if (pathname !== initialPath) {
-      history.push(initialPath);
-    }
-  }
+  ReactDOM.render(<App history={history} />, el);
 
-  ReactDOM.render(
-    <App history={history} />,
-    el
-  );
-  // ReactDOM.render(<App />, el);
   return {
     onParentNavigate({ pathname: nextPathname }) {
       const { pathname } = history.location;
-      console.log('pathname and nextPathname outside the if', pathname, nextPathname);
       if (pathname !== nextPathname) {
-        console.log('pathname and nextPathname', pathname, nextPathname);
         history.push(nextPathname);
       }
-    }
-  }
-}
+    },
+  };
+};
 
 if (process.env.NODE_ENV === 'development') {
   const el = document.getElementById('marketing-dev-root');
 
   if (el) {
-    mount(el, { onNavigate: () => {}, defaultHistoy: createBrowserHistory() });
+    mount(el, { defaultHistory: createBrowserHistory() });
   }
 }
 
