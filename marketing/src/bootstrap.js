@@ -28,8 +28,9 @@ const mount = (el, { onNavigate, defaultHistoy, initialPath }) => {
       const { pathname } = history.location;
       // console.log("🚀 ~ onParentNavigate ~ pathname: desde marketing-*--*-*", pathname)
 
-      // console.log('Container noticed navigation in Marketing', nextPathname);
+      console.log('pathname and nextPathname outside the if', pathname, nextPathname);
       if (pathname !== nextPathname) {
+        console.log('pathname and nextPathname', pathname, nextPathname);
         history.push(nextPathname);
       }
     }
