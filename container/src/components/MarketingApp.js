@@ -1,10 +1,12 @@
 import { mount } from 'marketing/MarketingApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 export default () => { 
   const ref = useRef(null);
   const history = useHistory();
+  // const history = createBrowserHistory();
 
   useEffect(() => {
     const props = mount(ref.current, {
@@ -15,11 +17,12 @@ export default () => {
           history.push(nextPathname);
         }
       },
+      defaultHistory: createBrowserHistory(),
     });
     console.log(props, 'first');
     history.listen(props?.onParentNavigate);
     console.log(history.listen(props?.onParentNavigate), 'history.listen(onParentNavigate)');
-  }, []);
+  }, [history]);
 
   return <div ref={ref} />;
 };
