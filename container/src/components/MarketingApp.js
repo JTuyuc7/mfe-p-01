@@ -16,7 +16,7 @@ export default () => {
         }
       },
     });
-    console.log(first, 'first');
+    console.log(props, 'first');
     history.listen(props?.onParentNavigate);
     console.log(history.listen(props?.onParentNavigate), 'history.listen(onParentNavigate)');
   }, []);
