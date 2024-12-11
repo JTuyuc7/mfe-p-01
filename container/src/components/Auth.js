@@ -1,9 +1,9 @@
-import { mount } from 'marketing/MarketingApp';
+import { mount } from 'auth/AuthApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-export default () => { 
+export default ({ onSignIn }) => { 
   const ref = useRef(null);
   const history = useHistory();
   // const history = createBrowserHistory();
@@ -18,6 +18,7 @@ export default () => {
         }
       },
       defaultHistory: createBrowserHistory(),
+      onSignIn
     });
     // console.log(props, 'first');
     history.listen(props?.onParentNavigate);
